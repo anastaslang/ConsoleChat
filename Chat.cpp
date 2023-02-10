@@ -183,8 +183,6 @@ void Chat::userMenu() //меню пользователя
 
 void Chat::showAllUsers() const//показать всех пользователей
 {
-    std::string name;
-
     std::cout << "\033[1m\033[34m" << "ВСЕ ПОЛЬЗОВАТЕЛИ ЧАТА: " << std::endl;
     for (auto &use : users_)
     {
@@ -209,8 +207,8 @@ void Chat::writeMessage()//написание и  добавление сооб�
         return;
     }
     if (to == "всех")//сохраняем сообщения в контейнер для всех пользователей
-        messages_.push_back(Message{activeUser_->getUserLogin(), "всех", text});
+        messages_.emplace_back(Message{activeUser_->getUserLogin(), "всех", text});
     else//иначе сохраняем для конкретного пользователя
-        messages_.push_back(Message{activeUser_->getUserLogin(), getUserByName(to)->getUserLogin(), text});
+        messages_.emplace_back(Message{activeUser_->getUserLogin(), getUserByName(to)->getUserLogin(), text});
 }  
              
